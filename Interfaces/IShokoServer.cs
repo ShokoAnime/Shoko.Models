@@ -77,7 +77,7 @@ namespace Shoko.Models.Interfaces
         [Rest("Group/DefaultSerie/{animeGroupID}", Verbs.Delete)]
         void RemoveDefaultSeriesForGroup(int animeGroupID);
 
-        [Rest("Group/Rename", Verbs.Post)]
+        [Rest("Group/Rename", Verbs.Post, TimeOutSeconds = 180)]
         string RenameAllGroups();
 
         [Rest("Group/{animeGroupID}/{deleteFiles}", Verbs.Delete)]
@@ -86,7 +86,7 @@ namespace Shoko.Models.Interfaces
         [Rest("Group/ForSerie/{animeSeriesID}/{userID}", Verbs.Get)]
         CL_AnimeGroup_User GetTopLevelGroupForSeries(int animeSeriesID, int userID);
 
-        [Rest("Group/Recreate/{resume}", Verbs.Post)]
+        [Rest("Group/Recreate/{resume}", Verbs.Post, TimeOutSeconds = 300)]
         void RecreateAllGroups(bool resume);
 
         [Rest("Group/Summary/{animeID}", Verbs.Get)]
@@ -96,7 +96,7 @@ namespace Shoko.Models.Interfaces
 
         #region Series
 
-        [Rest("Serie/CreateFromAnime/{animeID}/{userID}/{animeGroupID?}/{forceOverwrite}", Verbs.Post)]
+        [Rest("Serie/CreateFromAnime/{animeID}/{userID}/{animeGroupID?}/{forceOverwrite}", Verbs.Post, TimeOutSeconds = 300)]
         CL_Response<CL_AnimeSeries_User> CreateSeriesFromAnime(int animeID, int? animeGroupID, int userID, bool forceOverwrite);
 
         [Rest("Serie/{userID}", Verbs.Get)]
@@ -153,9 +153,6 @@ namespace Shoko.Models.Interfaces
 
         [Rest("Episode/LastWatched/{animeSeriesID}/{jmmuserID}", Verbs.Get)]
         CL_AnimeEpisode_User GetLastWatchedEpisodeForSeries(int animeSeriesID, int jmmuserID);
-
-        [Rest("Episode/Refresh/{episodeID}", Verbs.Post)]
-        string UpdateEpisodeData(int episodeID);
 
         [Rest("Episode/ContinueWatching/{userID}/{maxRecords}", Verbs.Get)]
         List<CL_AnimeEpisode_User> GetContinueWatchingFilter(int userID, int maxRecords);
@@ -254,15 +251,12 @@ namespace Shoko.Models.Interfaces
 
         [Rest("WebCache/AdminMessages", Verbs.Get)]
         List<Azure_AdminMessage> GetAdminMessages();
-        
+
         [Rest("WebCache/CrossRef/TvDB/{animeID}/{isAdmin}",Verbs.Get)]
         List<Azure_CrossRef_AniDB_TvDB> GetTVDBCrossRefWebCache(int animeID, bool isAdmin);
 
         [Rest("WebCache/CrossRef/Other/{animeID}/{crossRefType}", Verbs.Get)]
         CL_CrossRef_AniDB_Other_Response GetOtherAnimeCrossRefWebCache(int animeID, int crossRefType);
-
-        [Rest("WebCache/CrossRef/MAL/{animeID}", Verbs.Get)]
-        CL_CrossRef_AniDB_MAL_Response GetMALCrossRefWebCache(int animeID);
 
         [Rest("WebCache/CrossRef/TvDB/{crossRef_AniDB_TvDBId}", Verbs.Post)]
         string ApproveTVDBCrossRefWebCache(int crossRef_AniDB_TvDBId);
@@ -310,7 +304,7 @@ namespace Shoko.Models.Interfaces
         [Rest("File/Rehash/{videoLocalID}", Verbs.Post)]
         void RehashFile(int videoLocalID);
 
-        [Rest("File/Unrecognised/{userID}", Verbs.Get)]
+        [Rest("File/Unrecognised/{userID}", Verbs.Get, TimeOutSeconds = 300)]
         List<CL_VideoLocal> GetUnrecognisedFiles(int userID);
 
         [Rest("File/ManuallyLinked/{userID}", Verbs.Get)]
@@ -564,7 +558,7 @@ namespace Shoko.Models.Interfaces
         AniDB_Seiyuu GetAniDBSeiyuu(int seiyuuID);
 
         [Rest("AniDB/Episode/ForAnime/{animeID}", Verbs.Get)]
-        List<AniDB_Episode> GetAniDBEpisodesForAnime(int animeID);
+        List<CL_AniDB_Episode> GetAniDBEpisodesForAnime(int animeID);
 
         [Rest("AniDB/Recommendation/{animeID}", Verbs.Get)]
         List<AniDB_Recommendation> GetAniDBRecommendations(int animeID);
@@ -579,6 +573,9 @@ namespace Shoko.Models.Interfaces
         [Rest("TvDB/CrossRef/{animeID}", Verbs.Get)]
         List<CrossRef_AniDB_TvDBV2> GetTVDBCrossRefV2(int animeID);
 
+        [Rest("TvDB/CrossRef/Preview/{animeID}/{tvdbID}", Verbs.Get)]
+        List<CrossRef_AniDB_TvDB_Episode> GetTvDBEpisodeMatchPreview(int animeID, int tvdbID);
+
         [Rest("TvDB/CrossRef/{animeID}", Verbs.Delete)]
         string RemoveLinkAniDBTvDBForAnime(int animeID);
 
@@ -587,6 +584,9 @@ namespace Shoko.Models.Interfaces
 
         [Rest("TvDB/CrossRef", Verbs.Delete)]
         string RemoveLinkAniDBTvDB(CrossRef_AniDB_TvDBV2 link);
+
+        [Rest("TvDB/CrossRef/FromWebCache", Verbs.Post)]
+        string LinkTvDBUsingWebCacheLinks(List<CrossRef_AniDB_TvDBV2> links);
 
         [Rest("TvDB/Search/{criteria}", Verbs.Get)]
         List<TVDB_Series_Search_Response> SearchTheTvDB(string criteria);
@@ -606,14 +606,14 @@ namespace Shoko.Models.Interfaces
         [Rest("TvDB/Language", Verbs.Get)]
         List<TvDB_Language> GetTvDBLanguages();
 
-        [Rest("TvDB/CrossRef/Episode/{aniDBID}/{tvDBID}/{animeID}", Verbs.Post)]
-        string LinkAniDBTvDBEpisode(int aniDBID, int tvDBID, int animeID);
+        [Rest("TvDB/CrossRef/Episode/{aniDBID}/{tvDBID}", Verbs.Post)]
+        string LinkAniDBTvDBEpisode(int aniDBID, int tvDBID);
 
         [Rest("TvDB/CrossRef/Episode/{animeID}", Verbs.Get)]
-        List<CrossRef_AniDB_TvDB_Episode> GetTVDBCrossRefEpisode(int animeID);
+        List<CrossRef_AniDB_TvDB_Episode_Override> GetTVDBCrossRefEpisode(int animeID);
 
         [Rest("TvDB/CrossRef/Episode/{aniDBEpisodeID}", Verbs.Delete)]
-        string RemoveLinkAniDBTvDBEpisode(int aniDBEpisodeID);
+        string RemoveLinkAniDBTvDBEpisode(int aniDBEpisodeID, int tvdbEpisodeID);
 
         #endregion
 
@@ -640,8 +640,8 @@ namespace Shoko.Models.Interfaces
         [Rest("Trakt/LinkValidity/{slug}/{removeDBEntries}", Verbs.Post)]
         bool CheckTraktLinkValidity(string slug, bool removeDBEntries);
 
-        [Rest("Trakt/Pin/{pin}", Verbs.Post)]
-        string EnterTraktPIN(string pin);
+        [Rest("Trakt/DeviceCode", Verbs.Get)]
+        CL_TraktDeviceCode GetTraktDeviceCode();
 
         [Rest("Trakt/Episode/{traktShowID?}", Verbs.Get)]
         List<Trakt_Episode> GetAllTraktEpisodes(int? traktShowID);
@@ -675,31 +675,6 @@ namespace Shoko.Models.Interfaces
 
         [Rest("Trakt/Sync/{animeID}", Verbs.Post)]
         string SyncTraktSeries(int animeID);
-
-        #endregion
-
-        #region MAL Provider
-
-        [Rest("MAL/Search/{criteria}",Verbs.Get)]
-        List<CL_MALAnime_Response> SearchMAL(string criteria);
-
-        [Rest("MAL/Status", Verbs.Post)]
-        string TestMALLogin();
-
-        [Rest("MAL/CrossRef/{animeID}/{malID}/{epType}/{epNumber}", Verbs.Post)]
-        string LinkAniDBMAL(int animeID, int malID, string malTitle, int epType, int epNumber);
-
-        [Rest("MAL/CrossRef/{animeID}/{epType}/{epNumber}", Verbs.Delete)]
-        string RemoveLinkAniDBMAL(int animeID, int epType, int epNumber);
-
-        [Rest("MAL/CrossRef/{animeID}/{malID}/{malTitle}/{oldEpType}/{oldEpNumber}/{newEpType}/{newEpNumber}", Verbs.Patch)]
-        string LinkAniDBMALUpdated(int animeID, int malID, string malTitle, int oldEpType, int oldEpNumber, int newEpType, int newEpNumber);
-
-        [Rest("MAL/Sync/Up",Verbs.Post)]
-        void SyncMALUpload();
-
-        [Rest("MAL/Sync/Down", Verbs.Post)]
-        void SyncMALDownload();
 
         #endregion
 
@@ -825,8 +800,8 @@ namespace Shoko.Models.Interfaces
         [Rest("User/ChangePassword/{userID}", Verbs.Post)]
         string ChangePassword(int userID, string newPassword);
 
-        [Rest("User/Plex/Pin/{userID}", Verbs.Get)]
-        string LinkToPlex(int userID);
+        [Rest("User/Plex/LoginUrl/{userID}", Verbs.Get)]
+        string LoginUrl(int userID);
 
         [Rest("User/Plex/Authenticated/{userID}", Verbs.Get)]
         bool IsPlexAuthenticated(int userID);

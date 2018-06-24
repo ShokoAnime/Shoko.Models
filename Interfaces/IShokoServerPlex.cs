@@ -1,6 +1,9 @@
-﻿using Nancy.Rest.Annotations.Atributes;
+﻿using System.Collections.Generic;
+using Nancy.Rest.Annotations.Atributes;
 using Nancy.Rest.Annotations.Enums;
+using Shoko.Models.Plex.Connections;
 using Shoko.Models.PlexAndKodi;
+using MediaContainer = Shoko.Models.PlexAndKodi.MediaContainer;
 
 namespace Shoko.Models.Interfaces
 {
@@ -30,6 +33,25 @@ namespace Shoko.Models.Interfaces
 
         [Rest("Vote/{userId}/{id}/{votevalue}/{votetype}", Verbs.Get)]
         Response Vote(string userId, int id, float votevalue, int votetype);
+
+        #region Plex Linking
+
+        [Rest("Linking/Devices/Current/{userId}", Verbs.Get, TimeOutSeconds = 600)]
+        MediaDevice CurrentDevice(int userId);
+
+        [Rest("Linking/Directories/{userId}", Verbs.Post)]
+        void UseDirectories(int userId, List<Plex.Libraries.Directory> directories);
+
+        [Rest("Linking/Directories/{userId}", Verbs.Get, TimeOutSeconds = 600)]
+        Plex.Libraries.Directory[] Directories(int userId);
+
+        [Rest("Linking/Servers/{userId}", Verbs.Post)]
+        void UseDevice(int userId, MediaDevice server);
+
+        [Rest("Linking/Devices/{userId}", Verbs.Get, TimeOutSeconds = 600)]
+        MediaDevice[] AvailableDevices(int userId);
+
+        #endregion
 
     }
 }

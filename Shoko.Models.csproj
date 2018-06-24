@@ -27,5 +27,4 @@
     <ProjectReference Include="Nancy.Rest.Annotations\Nancy.Rest.Annotations.csproj" />
   </ItemGroup>
 
-
 </Project>

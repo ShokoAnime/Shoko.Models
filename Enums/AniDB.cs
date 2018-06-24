@@ -15,7 +15,17 @@ namespace Shoko.Models.Enums
         DeleteLocalOnly = 1,
         MarkDeleted = 2,
         MarkExternalStorage = 3,
-        MarkUnknown = 4
+        MarkUnknown = 4,
+        MarkDisk = 5
+    }
+
+    public enum AniDBFile_State
+    {
+        Unknown,
+        HDD,
+        Disk,
+        Deleted,
+        Remote
     }
 
     [Flags]
@@ -48,6 +58,21 @@ namespace Shoko.Models.Enums
         Episode = 4
     }
 
+    public enum AniDB_ResourceLinkType
+    {
+        ANN = 1,
+        MAL = 2, // MAL ID, there may be more than one
+        AnimeNFO = 3,
+        Site_JP = 4, // Official Japanese Site
+        Site_EN = 5, // Official English Site
+        Wiki_EN = 6, // wikipedia.com
+        Wiki_JP = 7, // wikipedia.jp
+        Syoboi = 8, // Airing Schedule (Japanese site)
+        ALLCinema = 9,
+        Anison = 10,
+        Crunchyroll = 28 // Series page, not episodes
+    }
+
     public enum AnimeType
     {
         Movie = 0,
@@ -73,5 +98,13 @@ namespace Shoko.Models.Enums
         File = 1,
         Episode = 2,
         HTTPAPI = 3
+    }
+
+    public enum CharacterAppearanceType
+    {
+        Main_Character,
+        Minor_Character,
+        Background_Character,
+        Cameo
     }
 }
