@@ -24,7 +24,7 @@
     <None Remove="Nancy.Rest.Annotations\**" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="Nancy.Rest.Annotations\Nancy.Rest.Annotations.csproj" />
+    <ProjectReference Include="..\..\Nancy.Rest.Annotations\Nancy.Rest.Annotations.csproj" />
   </ItemGroup>
 
 </Project>
