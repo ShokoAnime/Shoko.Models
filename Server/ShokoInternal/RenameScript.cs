@@ -1,5 +1,4 @@
-﻿using Microsoft.SqlServer.Server;
-
+﻿
 namespace Shoko.Models.Server
 {
     public class RenameScript
