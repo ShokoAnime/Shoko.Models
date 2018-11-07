@@ -1,6 +1,6 @@
-﻿namespace Shoko.Models.Azure
+﻿namespace Shoko.Models.WebCache
 {
-    public class Azure_AnimeLink
+    public class WebCache_AnimeLink
     {
         public int RandomAnimeID { get; set; }
         public int AnimeNeedingApproval { get; set; }

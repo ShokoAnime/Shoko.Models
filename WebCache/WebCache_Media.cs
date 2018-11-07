@@ -1,7 +1,7 @@
 ﻿
-namespace Shoko.Models.Azure
+namespace Shoko.Models.WebCache
 {
-    public class Azure_Media
+    public class WebCache_Media
     {
         public int MediaID { get; set; }
 

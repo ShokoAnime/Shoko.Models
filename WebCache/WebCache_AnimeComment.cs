@@ -1,6 +1,6 @@
-﻿namespace Shoko.Models.Azure
+﻿namespace Shoko.Models.WebCache
 {
-    public class Azure_AnimeComment
+    public class WebCache_AnimeComment
     {
         // In Summary
         public string Source { get; set; } // trakt, anidb

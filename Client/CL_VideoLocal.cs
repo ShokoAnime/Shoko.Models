@@ -13,5 +13,7 @@ namespace Shoko.Models.Client
         public List<CL_VideoLocal_Place> Places { get; set; }
         public Media Media { get; set; }
 
+        public string FileName { get; set; }
+
     }
 }

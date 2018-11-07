@@ -1,6 +1,6 @@
-﻿namespace Shoko.Models.Azure
+﻿namespace Shoko.Models.WebCache
 {
-    public class Azure_FileHash
+    public class WebCache_FileHash
     {
         public int? FileHashID { get; set; }
 

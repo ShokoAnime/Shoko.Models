@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace Shoko.Models.Azure
+namespace Shoko.Models.WebCache
 {
-    public class Azure_AnimeCharacter
+    public class WebCache_AnimeCharacter
     {
         // In Summary
         public int CharID { get; set; }

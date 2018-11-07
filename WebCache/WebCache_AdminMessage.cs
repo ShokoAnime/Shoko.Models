@@ -1,6 +1,6 @@
-﻿namespace Shoko.Models.Azure
+﻿namespace Shoko.Models.WebCache
 {
-    public class Azure_AdminMessage
+    public class WebCache_AdminMessage
     {
         public int AdminMessageId { get; set; }
         public long MessageDate { get; set; }

@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace Shoko.Models.Azure
+namespace Shoko.Models.WebCache
 {
-    public class Azure_UserInfo
+    public class WebCache_UserInfo
     {
         public int UserInfoId { get; set; }
 

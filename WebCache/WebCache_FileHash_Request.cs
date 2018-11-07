@@ -1,6 +1,6 @@
-﻿namespace Shoko.Models.Azure
+﻿namespace Shoko.Models.WebCache
 {
-    public class Azure_FileHash_Request
+    public class WebCache_FileHash_Request
     {
         public string ED2K { get; set; }
         public string CRC32 { get; set; }

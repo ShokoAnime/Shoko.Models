@@ -70,5 +70,6 @@ namespace Shoko.Models.Queue
         LinkFileManually,
         AniDB_MyListGetFile,
         ValidateAllImages,
+        SyncHashes
     }
 }

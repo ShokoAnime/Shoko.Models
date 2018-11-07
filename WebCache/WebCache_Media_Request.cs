@@ -1,8 +1,8 @@
 ﻿
 
-namespace Shoko.Models.Azure
+namespace Shoko.Models.WebCache
 {
-    public class Azure_Media_Request
+    public class WebCache_Media_Request
     {
         public string ED2K { get; set; }
         public byte[] MediaInfo { get; set; }

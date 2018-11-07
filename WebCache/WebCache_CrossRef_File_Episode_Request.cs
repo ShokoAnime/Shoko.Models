@@ -1,8 +1,8 @@
 ﻿
 
-namespace Shoko.Models.Azure
+namespace Shoko.Models.WebCache
 {
-    public class Azure_CrossRef_File_Episode_Request
+    public class WebCache_CrossRef_File_Episode_Request
     {
         public string Hash { get; set; }
         public int AnimeID { get; set; }
