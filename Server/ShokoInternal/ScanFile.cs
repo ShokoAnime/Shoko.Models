@@ -10,6 +10,7 @@ namespace Shoko.Models.Server
         public int VideoLocal_Place_ID { get; set; }
         public string FullName { get; set; }
         public long FileSize { get; set; }
+        public long FileSizeResult { get; set; }
         public int Status { get; set; }
         public DateTime? CheckDate { get; set; }
         public string Hash { get; set; }

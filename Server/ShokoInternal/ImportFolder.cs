@@ -10,6 +10,7 @@
         public int IsWatched { get; set; }
         public int IsDropSource { get; set; }
         public int IsDropDestination { get; set; }
+        public string PhysicalTag { get; set; }
        
     }
 }
