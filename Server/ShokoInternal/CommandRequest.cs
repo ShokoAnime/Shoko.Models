@@ -20,7 +20,13 @@ namespace Shoko.Models.Server
         public int Retries { get; set; }
         public string LastError { get; set; }
         public string Data { get; set; }
-
+        public int RetryFutureSeconds { get; set; }
+        public string PreconditionClass1 { get; set; }
+        public string PreconditionClass2 { get; set; }
+        public string PreconditionClass3 { get; set; }
+        public string PreconditionClass4 { get; set; }
+        public string PreconditionClass5 { get; set; }
+        public string PreconditionClass6 { get; set; }
     #endregion
 
     }

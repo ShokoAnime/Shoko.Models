@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Shoko.Models.Server;
+using Shoko.Models.Server.CrossRef;
 
 namespace Shoko.Models.Client
 {
@@ -24,9 +25,9 @@ namespace Shoko.Models.Client
         public DayOfWeek? AirsOn { get; set; }
 
         public CL_AniDB_AnimeDetailed AniDBAnime { get; set; }
-        public List<CrossRef_AniDB_TvDBV2> CrossRefAniDBTvDBV2 { get; set; }
-        public CrossRef_AniDB_Other CrossRefAniDBMovieDB { get; set; }
-        public List<CrossRef_AniDB_MAL> CrossRefAniDBMAL { get; set; }
+        public List<CL_CrossRef_AniDB_Provider> CrossRefAniDBTvDBV2 { get; set; }
+        public CL_CrossRef_AniDB_Provider CrossRefAniDBMovieDB { get; set; }
+        public List<CL_CrossRef_AniDB_Provider> CrossRefAniDBMAL { get; set; }
         public List<TvDB_Series> TvDB_Series { get; set; }
         public MovieDB_Movie MovieDB_Movie { get; set; }
         public CL_AnimeGroup_User TopLevelGroup { get; set; }

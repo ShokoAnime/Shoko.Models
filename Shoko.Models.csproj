@@ -24,6 +24,23 @@
     <None Remove="Nancy.Rest.Annotations\**" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Remove="Client\CL_CrossRef_AniDB_Provider_Response.cs" />
+    <Compile Remove="Server\CrossRef\CrossRef_AniDB_MAL.cs" />
+    <Compile Remove="Server\CrossRef\CrossRef_AniDB_Other.cs" />
+    <Compile Remove="Server\CrossRef\CrossRef_AniDB_TraktV2.cs" />
+    <Compile Remove="Server\CrossRef\CrossRef_AniDB_Trakt_Episode.cs" />
+    <Compile Remove="Server\CrossRef\CrossRef_AniDB_TvDB.cs" />
+    <Compile Remove="Server\CrossRef\CrossRef_AniDB_TvDBV2.cs" />
+    <Compile Remove="Server\CrossRef\CrossRef_AniDB_TvDB_Episode.cs" />
+    <Compile Remove="Server\CrossRef\CrossRef_AniDB_TvDB_Episode_Override.cs" />
+    <Compile Remove="WebCache\WebCache_CrossRef_AniDB_Other.cs" />
+    <Compile Remove="WebCache\WebCache_CrossRef_AniDB_Other_Request.cs" />
+    <Compile Remove="WebCache\WebCache_CrossRef_AniDB_Trakt.cs" />
+    <Compile Remove="WebCache\WebCache_CrossRef_AniDB_Trakt_Request.cs" />
+    <Compile Remove="WebCache\WebCache_CrossRef_AniDB_TvDB.cs" />
+    <Compile Remove="WebCache\WebCache_CrossRef_AniDB_TvDB_Request.cs" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\..\Nancy.Rest\Nancy.Rest.Module\Nancy.Rest.Annotations\Nancy.Rest.Annotations.csproj" />
   </ItemGroup>
 

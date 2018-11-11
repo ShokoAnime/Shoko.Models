@@ -9,6 +9,8 @@ namespace Shoko.Models.Enums
         TraktTV = 5,
         AnimeNano = 6,
         CrunchRoll = 7,
-        Konachan = 8
+        Konachan = 8,
+        TvDB = 9,
+
     }
 }
