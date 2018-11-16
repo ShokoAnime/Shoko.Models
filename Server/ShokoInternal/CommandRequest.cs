@@ -10,7 +10,7 @@ namespace Shoko.Models.Server
 
         public string Id { get; set; }
         public string Class { get; set; }
-        public int Type { get; set; }
+        public string Type { get; set; }
         
         public string ParallelTag { get; set; }
         public int ParallelMax { get; set; }

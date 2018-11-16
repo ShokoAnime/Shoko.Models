@@ -686,7 +686,7 @@ namespace Shoko.Models.Interfaces
         #region Other Providers (MovieDB, MAL)
 
         [Rest("Other/CrossRef/{animeID}/{crossRefType}", Verbs.Get)]
-        CrossRef_AniDB_Provider GetOtherAnimeCrossRef(int animeID, int crossRefType);
+        CL_CrossRef_AniDB_Provider GetOtherAnimeCrossRef(int animeID, int crossRefType);
 
         [Rest("Other/CrossRef/{animeID}/{id}/{crossRefType}", Verbs.Post)]
         string LinkAniDBOther(int animeID, int id, int crossRefType);

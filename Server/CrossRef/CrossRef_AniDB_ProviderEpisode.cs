@@ -9,6 +9,9 @@ namespace Shoko.Models.Server.CrossRef
     {
         public int AniDBEpisodeID { get; set; }
         public string ProviderEpisodeID { get; set; }
+        public int Season { get; set; }
+        public int Number { get; set; }
+        public EpisodeType Type { get; set; }
         public MatchRating MatchRating { get; set; }
     }
 }
