@@ -24,7 +24,7 @@ namespace Shoko.Models.PlexAndKodi
 
         [DataMember(EmitDefaultValue = true, Order = 4)]
         [XmlAttribute("duration")]
-        public long Duration { get; set; }
+        public double Duration { get; set; }
 
         [DataMember(EmitDefaultValue = true, Order = 5)]
         [XmlAttribute("height")]
@@ -80,7 +80,7 @@ namespace Shoko.Models.PlexAndKodi
 
         [DataMember(EmitDefaultValue = false, Order = 18)]
         [XmlAttribute("frameRate")]
-        public float FrameRate { get; set; }
+        public double FrameRate { get; set; }
 
         [DataMember(EmitDefaultValue = false, Order = 19)]
         [XmlAttribute("colorSpace")]
@@ -176,7 +176,7 @@ namespace Shoko.Models.PlexAndKodi
 
         [XmlIgnore]
         [Ignore]
-        public float PA { get; set; }
+        public double PA { get; set; }
 
         public object Clone()
         {

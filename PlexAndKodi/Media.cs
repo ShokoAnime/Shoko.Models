@@ -17,7 +17,7 @@ namespace Shoko.Models.PlexAndKodi
 
         [DataMember(EmitDefaultValue = true, Order = 2)]
         [XmlAttribute("duration")]
-        public long Duration { get; set; }
+        public double Duration { get; set; }
 
         [DataMember(EmitDefaultValue = false, Order = 3)]
         [XmlAttribute("videoFrameRate")]
@@ -41,7 +41,7 @@ namespace Shoko.Models.PlexAndKodi
 
         [DataMember(EmitDefaultValue = false, Order = 8)]
         [XmlAttribute("aspectRatio")]
-        public float AspectRatio { get; set; }
+        public double AspectRatio { get; set; }
 
         [DataMember(EmitDefaultValue = true, Order = 9)]
         [XmlAttribute("height")]
