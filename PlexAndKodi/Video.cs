@@ -135,7 +135,7 @@ namespace Shoko.Models.PlexAndKodi
         [Tags("Plex")]
         [DataMember(EmitDefaultValue = true, Order = 47)]
         [XmlAttribute("duration")]
-        public long Duration { get; set; }
+        public double Duration { get; set; }
 
         [DataMember(EmitDefaultValue = true, Order = 48)]
         [XmlAttribute("episode_count")]

@@ -30,7 +30,7 @@ namespace Shoko.Models.PlexAndKodi
 
         [DataMember(EmitDefaultValue = true, Order = 5)]
         [XmlAttribute("duration")]
-        public long Duration { get; set; }
+        public double Duration { get; set; }
 
         [DataMember(EmitDefaultValue = false, Order = 6)]
         [XmlAttribute("key")]
