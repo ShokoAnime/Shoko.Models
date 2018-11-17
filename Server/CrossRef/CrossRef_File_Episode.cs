@@ -1,4 +1,6 @@
-﻿namespace Shoko.Models.Server
+﻿using Shoko.Models.WebCache;
+
+namespace Shoko.Models.Server
 {
     public class CrossRef_File_Episode
     {

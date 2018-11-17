@@ -6,7 +6,8 @@ namespace Shoko.Models.Enums
 {
     public enum WebCache_ReliabilityType
     {
-        Verified,
+        AdminVerified,
+        ModeratorVerified,
         User,
         Popular
     }

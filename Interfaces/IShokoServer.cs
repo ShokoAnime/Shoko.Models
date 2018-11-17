@@ -242,13 +242,10 @@ namespace Shoko.Models.Interfaces
         string UseLinksWebCache(int animeID, int crossRefType);
 
         [Rest("WebCache/RandomLinkForApproval/{linkType}", Verbs.Get)]
-        WebCache_AnimeLink Admin_GetRandomLinkForApproval(int linkType);
+        WebCache_Reliability<CL_CrossRef_AniDB_Provider> Admin_GetRandomLinkForApproval(int linkType);
 
         [Rest("WebCache/IsAdmin", Verbs.Get)]
         bool IsWebCacheAdmin();
-
-        [Rest("WebCache/AdminMessages", Verbs.Get)]
-        List<WebCache_AdminMessage> GetAdminMessages();
 
         [Rest("WebCache/CrossRef/{animeID}/{crossRefType}",Verbs.Get)]
         List<WebCache_Reliability<CL_CrossRef_AniDB_Provider>> GetCrossRefWebCache(int animeID, int crossRefType);
