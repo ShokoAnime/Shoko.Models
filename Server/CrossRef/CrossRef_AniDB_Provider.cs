@@ -14,5 +14,6 @@ namespace Shoko.Models.Server.CrossRef
         public CrossRefType CrossRefType { get; set; }
         public string EpisodesData { get; set; }
         public string EpisodesOverrideData { get; set; }
+        public bool IsAdditive { get; set; }
     }
 }

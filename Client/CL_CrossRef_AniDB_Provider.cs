@@ -10,7 +10,6 @@ namespace Shoko.Models.Client
         public virtual List<CrossRef_AniDB_ProviderEpisode> Episodes { get; set; }
         public virtual List<CrossRef_AniDB_ProviderEpisode> EpisodesOverride { get; set; }
 
-        public bool IsAdditive { get; set; }
 
     }
 }
