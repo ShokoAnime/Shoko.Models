@@ -71,6 +71,7 @@ namespace Shoko.Models.Queue
         AniDB_MyListGetFile,
         ValidateAllImages,
         SyncHashes,
-        VerifyFile
+        VerifyFile,
+        LinkAniDBTrakt,
     }
 }
