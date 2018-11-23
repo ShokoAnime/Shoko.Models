@@ -4,7 +4,6 @@
     {
         #region Server DB columns
 
-        public int AniDB_CharacterID { get; set; }
         public int CharID { get; set; }
         public string PicName { get; set; }
         public string CreatorListRaw { get; set; }
