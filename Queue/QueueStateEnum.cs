@@ -73,5 +73,14 @@ namespace Shoko.Models.Queue
         SyncHashes,
         VerifyFile,
         LinkAniDBTrakt,
+        LogRotation,
+        Import,
+        ScanFolder,
+        ScanDropFolders,
+        RemoveMissingFiles,
+        DeleteFolder,
+        RefreshAllMediaInfo,
+        SyncMediaInfos,
+        GetImages
     }
 }
