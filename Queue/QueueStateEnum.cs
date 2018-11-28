@@ -81,6 +81,8 @@ namespace Shoko.Models.Queue
         DeleteFolder,
         RefreshAllMediaInfo,
         SyncMediaInfos,
-        GetImages
+        GetImages,
+        Update,
+        ShortUpdate
     }
 }
