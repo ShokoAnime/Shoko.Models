@@ -83,6 +83,7 @@ namespace Shoko.Models.Queue
         SyncMediaInfos,
         GetImages,
         Update,
-        ShortUpdate
+        ShortUpdate,
+        FileWatch
     }
 }
