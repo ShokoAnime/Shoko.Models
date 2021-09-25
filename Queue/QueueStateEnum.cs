@@ -1,4 +1,4 @@
-﻿// ReSharper disable InconsistentNaming
+// ReSharper disable InconsistentNaming
 
 namespace Shoko.Models.Queue
 {
@@ -49,15 +49,15 @@ namespace Shoko.Models.Queue
         UpdateTraktData,
         UploadMALWatched,
         VoteAnime,
-        WebCacheDeleteXRefAniDBMAL,
-        WebCacheDeleteXRefAniDBOther,
-        WebCacheDeleteXRefAniDBTrakt,
-        WebCacheDeleteXRefAniDBTvDB,
+        WebCacheDeleteXRefAniDBMAL, //OBSOLETE
+        WebCacheDeleteXRefAniDBOther, //OBSOLETE
+        WebCacheDeleteXRefAniDBTrakt, //OBSOLETE
+        WebCacheDeleteXRefAniDBTvDB, //OBSOLETE
         WebCacheDeleteXRefFileEpisode,
-        WebCacheSendXRefAniDBMAL,
-        WebCacheSendXRefAniDBOther,
-        WebCacheSendXRefAniDBTrakt,
-        WebCacheSendXRefAniDBTvDB,
+        WebCacheSendXRefAniDBMAL, //OBSOLETE
+        WebCacheSendXRefAniDBOther, //OBSOLETE
+        WebCacheSendXRefAniDBTrakt, //OBSOLETE
+        WebCacheSendXRefAniDBTvDB, //OBSOLETE
         WebCacheSendXRefFileEpisode,
         AniDB_MyListAdd,
         AniDB_MyListDelete,
@@ -70,5 +70,7 @@ namespace Shoko.Models.Queue
         LinkFileManually,
         AniDB_MyListGetFile,
         ValidateAllImages,
+        WebCacheDeleteXRefAniDB,
+        WebCacheSendXRefAniDB
     }
 }

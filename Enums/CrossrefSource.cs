@@ -7,7 +7,12 @@ namespace Shoko.Models.Enums
         User = 2,
         WebCache = 3,
     }
-
+    public enum MediaType
+    {
+        TvShow,
+        Movie,
+        Unknown
+    }
     public enum MatchRating
     {
         UserVerified = 1,

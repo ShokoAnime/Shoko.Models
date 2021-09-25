@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using Nancy.Rest.Annotations.Attributes;
 using Nancy.Rest.Annotations.Enums;
@@ -252,26 +252,15 @@ namespace Shoko.Models.Interfaces
         [Rest("WebCache/AdminMessages", Verbs.Get)]
         List<Azure_AdminMessage> GetAdminMessages();
 
-        [Rest("WebCache/CrossRef/TvDB/{animeID}/{isAdmin}",Verbs.Get)]
-        List<Azure_CrossRef_AniDB_TvDB> GetTVDBCrossRefWebCache(int animeID, bool isAdmin);
+        [Rest("WebCache/CrossRef/{provider}/{animeID}/{isAdmin}",Verbs.Get)]
+        List<Azure_CrossRef_AniDB> GetCrossRefWebCache(string provider, int animeID, bool isAdmin);
 
-        [Rest("WebCache/CrossRef/Other/{animeID}/{crossRefType}", Verbs.Get)]
-        CL_CrossRef_AniDB_Other_Response GetOtherAnimeCrossRefWebCache(int animeID, int crossRefType);
+        [Rest("WebCache/CrossRef/{provider}/{crossRef_AniDB_TvDBId}", Verbs.Post)]
+        string ApproveCrossRefWebCache(int crossRef_AniDB_TvDBId);
 
-        [Rest("WebCache/CrossRef/TvDB/{crossRef_AniDB_TvDBId}", Verbs.Post)]
-        string ApproveTVDBCrossRefWebCache(int crossRef_AniDB_TvDBId);
+        [Rest("WebCache/CrossRef/{provider}/{crossRef_AniDB_TvDBId}", Verbs.Delete)]
+        string RevokeCrossRefWebCache(int crossRef_AniDB_TvDBId);
 
-        [Rest("WebCache/CrossRef/TvDB/{crossRef_AniDB_TvDBId}", Verbs.Delete)]
-        string RevokeTVDBCrossRefWebCache(int crossRef_AniDB_TvDBId);
-
-        [Rest("WebCache/CrossRef/Trakt/{animeID}/{isAdmin}", Verbs.Get)]
-        List<Azure_CrossRef_AniDB_Trakt> GetTraktCrossRefWebCache(int animeID, bool isAdmin);
-
-        [Rest("WebCache/CrossRef/Trakt/{crossRef_AniDB_TraktId}", Verbs.Post)]
-        string ApproveTraktCrossRefWebCache(int crossRef_AniDB_TraktId);
-
-        [Rest("WebCache/CrossRef/Trakt/{crossRef_AniDB_TraktId}", Verbs.Delete)]
-        string RevokeTraktCrossRefWebCache(int crossRef_AniDB_TraktId);
 
         #endregion
 
@@ -566,25 +555,41 @@ namespace Shoko.Models.Interfaces
 
         #endregion
 
-        #region TvDB Provider
+        #region CrossRef Providers
 
+        /*
         [Rest("TvDB/CrossRef/{animeID}", Verbs.Get)]
         List<CrossRef_AniDB_TvDBV2> GetTVDBCrossRefV2(int animeID);
+        */
 
-        [Rest("TvDB/CrossRef/Preview/{animeID}/{tvdbID}", Verbs.Get)]
-        List<CrossRef_AniDB_TvDB_Episode> GetTvDBEpisodeMatchPreview(int animeID, int tvdbID);
+        [Rest("CrossRef/Preview/{animeID}/{provider}/{providerId}", Verbs.Get)]
+        List<CrossRef_AniDB_Episode> GetTvDBEpisodeMatchPreview(int animeID, string provider, string providerId);
 
-        [Rest("TvDB/CrossRef/{animeID}", Verbs.Delete)]
-        string RemoveLinkAniDBTvDBForAnime(int animeID);
+        [Rest("CrossRef/{provider}/{animeID}", Verbs.Delete)]
+        string RemoveLinkAniDBForAnime(string provider, int animeID);
 
+        [Rest("CrossRef/Episode/{aniDBID}/{provider}/{providerId}", Verbs.Post)]
+        string LinkTvDBEpisode(int aniDBID, string provider, string providerId);
+
+        [Rest("CrossRef/Episode/{animeID}/{provider}", Verbs.Get)]
+        List<CrossRef_AniDB_Episode_Override> GetCrossRefEpisode(int animeID, string provider);
+
+        [Rest("CrossRef/Episode/{aniDBEpisodeID}/{provider}/{providerEpisodeID}", Verbs.Delete)]
+        string RemoveLinkAniDBEpisode(int aniDBEpisodeID, string provider, string providerEpisodeID);
+
+
+        /*
         [Rest("TvDB/CrossRef", Verbs.Post)]
         string LinkAniDBTvDB(CrossRef_AniDB_TvDBV2 link);
 
         [Rest("TvDB/CrossRef", Verbs.Delete)]
         string RemoveLinkAniDBTvDB(CrossRef_AniDB_TvDBV2 link);
-
         [Rest("TvDB/CrossRef/FromWebCache", Verbs.Post)]
         string LinkTvDBUsingWebCacheLinks(List<CrossRef_AniDB_TvDBV2> links);
+        */
+        #endregion
+
+        #region CrossRef TvDB
 
         [Rest("TvDB/Search/{criteria}", Verbs.Get)]
         List<TVDB_Series_Search_Response> SearchTheTvDB(string criteria);
@@ -604,19 +609,13 @@ namespace Shoko.Models.Interfaces
         [Rest("TvDB/Language", Verbs.Get)]
         List<TvDB_Language> GetTvDBLanguages();
 
-        [Rest("TvDB/CrossRef/Episode/{aniDBID}/{tvDBID}", Verbs.Post)]
-        string LinkAniDBTvDBEpisode(int aniDBID, int tvDBID);
 
-        [Rest("TvDB/CrossRef/Episode/{animeID}", Verbs.Get)]
-        List<CrossRef_AniDB_TvDB_Episode_Override> GetTVDBCrossRefEpisode(int animeID);
-
-        [Rest("TvDB/CrossRef/Episode/{aniDBEpisodeID}/{tvdbEpisodeID}", Verbs.Delete)]
-        string RemoveLinkAniDBTvDBEpisode(int aniDBEpisodeID, int tvdbEpisodeID);
 
         #endregion
 
         #region Trakt Provider
 
+        /*
         [Rest("Trakt/CrossRef/{animeID}", Verbs.Get)]
         List<CrossRef_AniDB_TraktV2> GetTraktCrossRefV2(int animeID);
 
@@ -625,7 +624,6 @@ namespace Shoko.Models.Interfaces
 
         [Rest("Trakt/CrossRef/Episode/{animeID}", Verbs.Get)]
         List<CrossRef_AniDB_Trakt_Episode> GetTraktCrossRefEpisode(int animeID);
-
         [Rest("Trakt/CrossRef/{animeID}/{aniEpType}/{aniEpNumber}/{traktID}/{seasonNumber}/{traktEpNumber}/{crossRef_AniDB_TraktV2ID?}", Verbs.Post)]
         string LinkAniDBTrakt(int animeID, int aniEpType, int aniEpNumber, string traktID, int seasonNumber, int traktEpNumber, int? crossRef_AniDB_TraktV2ID);
 
@@ -634,6 +632,7 @@ namespace Shoko.Models.Interfaces
 
         [Rest("Trakt/CrossRef/{animeID}/{aniEpType}/{aniEpNumber}/{traktID}/{traktSeasonNumber}/{traktEpNumber}", Verbs.Delete)]
         string RemoveLinkAniDBTrakt(int animeID, int aniEpType, int aniEpNumber, string traktID, int traktSeasonNumber, int traktEpNumber);
+        */
 
         [Rest("Trakt/LinkValidity/{slug}/{removeDBEntries}", Verbs.Post)]
         bool CheckTraktLinkValidity(string slug, bool removeDBEntries);
@@ -691,7 +690,7 @@ namespace Shoko.Models.Interfaces
         string UpdateMovieDBData(int movieID);
 
         #endregion
-
+        /*
         #region Other Providers (MovieDB, MAL)
 
         [Rest("Other/CrossRef/{animeID}/{crossRefType}", Verbs.Get)]
@@ -704,7 +703,7 @@ namespace Shoko.Models.Interfaces
         string RemoveLinkAniDBOther(int animeID, int crossRefType);
 
         #endregion
-
+        */
         #region Server
 
 

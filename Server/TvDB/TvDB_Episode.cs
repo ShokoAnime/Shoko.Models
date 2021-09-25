@@ -1,4 +1,4 @@
-﻿
+
 
 using System;
 
@@ -23,4 +23,5 @@ namespace Shoko.Models.Server
         public int? Rating { get; set; }
         public DateTime? AirDate { get; set; }
     }
+
 }

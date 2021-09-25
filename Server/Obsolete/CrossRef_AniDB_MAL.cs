@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace Shoko.Models.Server
 {
@@ -11,6 +11,7 @@ namespace Shoko.Models.Server
         public int StartEpisodeType { get; set; }
         public int StartEpisodeNumber { get; set; }
         public int CrossRefSource { get; set; }
+
         public object Clone()
         {
             return new CrossRef_AniDB_MAL

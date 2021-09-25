@@ -1,4 +1,4 @@
-﻿namespace Shoko.Models
+namespace Shoko.Models
 {
     public class Constants
     {
@@ -120,6 +120,13 @@
 			 * */
         }
 
+        public struct Providers
+        {
+            public const string MAL = "MAL";
+            public const string TvDB = "TvDB";
+            public const string MovieDB = "TmDB";
+            public const string Trakt = "Trakt";
+        }
       
 
         public struct FileRenameTest_Test
