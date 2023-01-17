@@ -784,13 +784,13 @@ namespace Shoko.Models.Interfaces
         #region Users
 
         [Rest("User",Verbs.Get)]
-        List<JMMUser> GetAllUsers();
+        List<CL_JMMUser> GetAllUsers();
 
         [Rest("User/{username}", Verbs.Post)]
-        JMMUser AuthenticateUser(string username, string password);
+        CL_JMMUser AuthenticateUser(string username, string password);
 
         [Rest("User", Verbs.Post)]
-        string SaveUser(JMMUser user);
+        string SaveUser(CL_JMMUser user);
 
         [Rest("User", Verbs.Delete)]
         string DeleteUser(int userID);
