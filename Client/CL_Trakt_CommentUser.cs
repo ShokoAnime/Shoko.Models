@@ -1,10 +1,15 @@
-﻿namespace Shoko.Models.Client
+﻿
+namespace Shoko.Models.Client;
+
+public class CL_Trakt_CommentUser
 {
-    public class CL_Trakt_CommentUser
-    {
-        // user details
-        public CL_Trakt_User User { get; set; }
-        // Comment details
-        public CL_Trakt_Comment Comment { get; set; }
-    }
+    /// <summary>
+    /// User details.
+    /// </summary>
+    public CL_Trakt_User User { get; set; }
+
+    /// <summary>
+    /// Comment details.
+    /// </summary>
+    public CL_Trakt_Comment Comment { get; set; }
 }

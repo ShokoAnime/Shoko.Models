@@ -1,9 +1,17 @@
-﻿using Shoko.Models.Server;
+﻿
+namespace Shoko.Models.Client;
 
-namespace Shoko.Models.Client
+public class CL_BookmarkedAnime
 {
-    public class CL_BookmarkedAnime : BookmarkedAnime
-    {
-        public CL_AniDB_Anime Anime { get; set; }
-    }
+    public int BookmarkedAnimeID { get; set; }
+
+    public int AnimeID { get; set; }
+
+    public int Priority { get; set; }
+
+    public string Notes { get; set; }
+
+    public int Downloading { get; set; }
+
+    public CL_AniDB_Anime Anime { get; set; }
 }

@@ -1,9 +1,9 @@
-﻿using Shoko.Models.Azure;
+﻿
+namespace Shoko.Models.Client;
 
-namespace Shoko.Models.Client
+public class CL_CrossRef_AniDB_Other_Response : CL_CrossRef_AniDB_Other
 {
-    public class CL_CrossRef_AniDB_Other_Response : Azure_CrossRef_AniDB_Other_Request
-    {
-        public int IsAdminApproved { get; set; }
-    }
+    public string Username { get; set; }
+
+    public int IsAdminApproved { get; set; }
 }

@@ -1,11 +1,18 @@
-﻿using Shoko.Models.Server;
+﻿
+namespace Shoko.Models.Client;
 
-namespace Shoko.Models.Client
+public class CL_AniDB_Anime_Relation
 {
-    public class CL_AniDB_Anime_Relation : AniDB_Anime_Relation
-    {
-        public CL_AniDB_Anime AniDB_Anime { get; set; }
-        public CL_AnimeSeries_User AnimeSeries { get; set; }
+    public int AniDB_Anime_RelationID { get; set; }
 
-    }
+    public int AnimeID { get; set; }
+
+    public string RelationType { get; set; }
+
+    public int RelatedAnimeID { get; set; }
+
+    public CL_AniDB_Anime AniDB_Anime { get; set; }
+
+    public CL_AnimeSeries_User AnimeSeries { get; set; }
+
 }

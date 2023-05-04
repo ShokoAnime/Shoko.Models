@@ -1,3 +1,5 @@
+using System;
+
 namespace Shoko.Models.Enums
 {
     public enum CrossRefSource
@@ -5,6 +7,7 @@ namespace Shoko.Models.Enums
         Automatic = 0,
         AniDB = 1,
         User = 2,
+        [Obsolete("DO NOT USE THIS.")]
         WebCache = 3,
     }
 

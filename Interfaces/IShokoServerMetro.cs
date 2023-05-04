@@ -3,7 +3,6 @@ using Nancy.Rest.Annotations.Attributes;
 using Nancy.Rest.Annotations.Enums;
 using Shoko.Models.Client;
 using Shoko.Models.Metro;
-using Shoko.Models.Server;
 
 namespace Shoko.Models
 {
@@ -26,10 +25,10 @@ namespace Shoko.Models
         List<Metro_Anime_Summary> SearchAnime(int userID, string queryText, int maxRecords);
 
         [Rest("User/Auth/{username}/{password}", Verbs.Post)]
-        JMMUser AuthenticateUser(string username, string password);
+        CL_JMMUser AuthenticateUser(string username, string password);
 
         [Rest("User", Verbs.Get)]
-        List<JMMUser> GetAllUsers();
+        List<CL_JMMUser> GetAllUsers();
 
         [Rest("Group/{userID}", Verbs.Get)]
         List<CL_AnimeGroup_User> GetAllGroups(int userID);

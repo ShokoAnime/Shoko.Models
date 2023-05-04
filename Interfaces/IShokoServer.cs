@@ -4,14 +4,12 @@ using Nancy.Rest.Annotations.Attributes;
 using Nancy.Rest.Annotations.Enums;
 using Shoko.Models.Azure;
 using Shoko.Models.Client;
-using Shoko.Models.Server;
-using Shoko.Models.TvDB;
 
 // ReSharper disable InconsistentNaming
 namespace Shoko.Models.Interfaces
 {
     [RestBasePath("/v1")]
-    public interface IShokoServer 
+    public interface IShokoServer
     {
 
         #region GroupsFilter
@@ -216,22 +214,22 @@ namespace Shoko.Models.Interfaces
         string DeleteCustomTagCrossRef(int customTagID, int crossRefType, int crossRefID);
 
         [Rest("CustomTag/CrossRef", Verbs.Post)]
-        CL_Response<CrossRef_CustomTag> SaveCustomTagCrossRef(CrossRef_CustomTag contract);
+        CL_Response<CL_CrossRef_CustomTag> SaveCustomTagCrossRef(CL_CrossRef_CustomTag contract);
 
         [Rest("CustomTag/CrossRef/{xrefID}", Verbs.Delete)]
         string DeleteCustomTagCrossRefByID(int xrefID);
 
         [Rest("CustomTag", Verbs.Get)]
-        List<CustomTag> GetAllCustomTags();
+        List<CL_CustomTag> GetAllCustomTags();
 
         [Rest("CustomTag", Verbs.Post)]
-        CL_Response<CustomTag> SaveCustomTag(CustomTag contract);
+        CL_Response<CL_CustomTag> SaveCustomTag(CL_CustomTag contract);
 
         [Rest("CustomTag/{customTagID}", Verbs.Delete)]
         string DeleteCustomTag(int customTagID);
 
         [Rest("CustomTag/{customTagID}", Verbs.Get)]
-        CustomTag GetCustomTag(int customTagID);
+        CL_CustomTag GetCustomTag(int customTagID);
 
         #endregion
 
@@ -265,7 +263,7 @@ namespace Shoko.Models.Interfaces
         string RevokeTVDBCrossRefWebCache(int crossRef_AniDB_TvDBId);
 
         [Rest("WebCache/CrossRef/Trakt/{animeID}/{isAdmin}", Verbs.Get)]
-        List<Azure_CrossRef_AniDB_Trakt> GetTraktCrossRefWebCache(int animeID, bool isAdmin);
+        List<CL_Azure_CrossRef_AniDB_Trakt> GetTraktCrossRefWebCache(int animeID, bool isAdmin);
 
         [Rest("WebCache/CrossRef/Trakt/{crossRef_AniDB_TraktId}", Verbs.Post)]
         string ApproveTraktCrossRefWebCache(int crossRef_AniDB_TraktId);
@@ -336,7 +334,7 @@ namespace Shoko.Models.Interfaces
 
         [Rest("File/Physical/{videoplaceid}", Verbs.Delete)]
         string DeleteVideoLocalPlaceAndFile(int videoplaceid);
-        
+
         [Rest("File/Physical/{videoplaceid}/SkipFolder", Verbs.Delete)]
         string DeleteVideoLocalPlaceAndFileSkipFolder(int videoplaceid);
 
@@ -393,10 +391,10 @@ namespace Shoko.Models.Interfaces
         #region Folders
 
         [Rest("Folder", Verbs.Get)]
-        List<ImportFolder> GetImportFolders();
+        List<CL_ImportFolder> GetImportFolders();
 
         [Rest("Folder", Verbs.Post)]
-        CL_Response<ImportFolder> SaveImportFolder(ImportFolder contract);
+        CL_Response<CL_ImportFolder> SaveImportFolder(CL_ImportFolder contract);
 
         [Rest("Folder/{importFolderID}", Verbs.Delete)]
         string DeleteImportFolder(int importFolderID);
@@ -452,7 +450,7 @@ namespace Shoko.Models.Interfaces
 
         [Rest("AniDB/Anime/Update/{animeID}", Verbs.Post)]
         string UpdateAnimeData(int animeID);
-        
+
         [Rest("AniDB/Anime/GetUpdated/{animeID}", Verbs.Post)]
         CL_AniDB_AnimeDetailed GetUpdatedAnimeData(int animeID);
 
@@ -531,7 +529,7 @@ namespace Shoko.Models.Interfaces
         void VoteAnimeRevoke(int animeID);
 
         [Rest("AniDB/Vote/{animeID}", Verbs.Get)]
-        AniDB_Vote GetUserVote(int animeID);
+        CL_AniDB_Vote GetUserVote(int animeID);
 
         #endregion
 
@@ -553,13 +551,13 @@ namespace Shoko.Models.Interfaces
         List <CL_AniDB_Character> GetCharactersForSeiyuu(int seiyuuID);
 
         [Rest("AniDB/Seiyuu/{seiyuuID}", Verbs.Get)]
-        AniDB_Seiyuu GetAniDBSeiyuu(int seiyuuID);
+        CL_AniDB_Seiyuu GetAniDBSeiyuu(int seiyuuID);
 
         [Rest("AniDB/Episode/ForAnime/{animeID}", Verbs.Get)]
         List<CL_AniDB_Episode> GetAniDBEpisodesForAnime(int animeID);
 
         [Rest("AniDB/Recommendation/{animeID}", Verbs.Get)]
-        List<AniDB_Recommendation> GetAniDBRecommendations(int animeID);
+        List<CL_AniDB_Recommendation> GetAniDBRecommendations(int animeID);
 
         [Rest("AniDB/AVDumpFile/{vidLocalID}", Verbs.Get, TimeOutSeconds = 600)]
         string AVDumpFile(int vidLocalID);
@@ -569,46 +567,46 @@ namespace Shoko.Models.Interfaces
         #region TvDB Provider
 
         [Rest("TvDB/CrossRef/{animeID}", Verbs.Get)]
-        List<CrossRef_AniDB_TvDBV2> GetTVDBCrossRefV2(int animeID);
+        List<CL_CrossRef_AniDB_TvDB> GetTVDBCrossRefV2(int animeID);
 
         [Rest("TvDB/CrossRef/Preview/{animeID}/{tvdbID}", Verbs.Get)]
-        List<CrossRef_AniDB_TvDB_Episode> GetTvDBEpisodeMatchPreview(int animeID, int tvdbID);
+        List<CL_CrossRef_AniDB_TvDB_Episode> GetTvDBEpisodeMatchPreview(int animeID, int tvdbID);
 
         [Rest("TvDB/CrossRef/{animeID}", Verbs.Delete)]
         string RemoveLinkAniDBTvDBForAnime(int animeID);
 
         [Rest("TvDB/CrossRef", Verbs.Post)]
-        string LinkAniDBTvDB(CrossRef_AniDB_TvDBV2 link);
+        string LinkAniDBTvDB(CL_CrossRef_AniDB_TvDB link);
 
         [Rest("TvDB/CrossRef", Verbs.Delete)]
-        string RemoveLinkAniDBTvDB(CrossRef_AniDB_TvDBV2 link);
+        string RemoveLinkAniDBTvDB(CL_CrossRef_AniDB_TvDB link);
 
         [Rest("TvDB/CrossRef/FromWebCache", Verbs.Post)]
-        string LinkTvDBUsingWebCacheLinks(List<CrossRef_AniDB_TvDBV2> links);
+        string LinkTvDBUsingWebCacheLinks(List<CL_CrossRef_AniDB_TvDB> links);
 
         [Rest("TvDB/Search/{criteria}", Verbs.Get)]
-        List<TVDB_Series_Search_Response> SearchTheTvDB(string criteria);
+        List<CL_TVDB_Series_Search_Response> SearchTheTvDB(string criteria);
 
         [Rest("TvDB/Poster/{tvDBID?}", Verbs.Get)]
-        List<TvDB_ImagePoster> GetAllTvDBPosters(int? tvDBID);
+        List<CL_TvDB_ImagePoster> GetAllTvDBPosters(int? tvDBID);
 
         [Rest("TvDB/Banner/{tvDBID?}", Verbs.Get)]
-        List<TvDB_ImageWideBanner> GetAllTvDBWideBanners(int? tvDBID);
+        List<CL_TvDB_ImageWideBanner> GetAllTvDBWideBanners(int? tvDBID);
 
         [Rest("TvDB/Fanart/{tvDBID?}", Verbs.Get)]
-        List<TvDB_ImageFanart> GetAllTvDBFanart(int? tvDBID);
+        List<CL_TvDB_ImageFanart> GetAllTvDBFanart(int? tvDBID);
 
         [Rest("TvDB/Episode/{tvDBID?}", Verbs.Get)]
-        List<TvDB_Episode> GetAllTvDBEpisodes(int? tvDBID);
+        List<CL_TvDB_Episode> GetAllTvDBEpisodes(int? tvDBID);
 
         [Rest("TvDB/Language", Verbs.Get)]
-        List<TvDB_Language> GetTvDBLanguages();
+        List<CL_TvDB_Language> GetTvDBLanguages();
 
         [Rest("TvDB/CrossRef/Episode/{aniDBID}/{tvDBID}", Verbs.Post)]
         string LinkAniDBTvDBEpisode(int aniDBID, int tvDBID);
 
         [Rest("TvDB/CrossRef/Episode/{animeID}", Verbs.Get)]
-        List<CrossRef_AniDB_TvDB_Episode_Override> GetTVDBCrossRefEpisode(int animeID);
+        List<CL_CrossRef_AniDB_TvDB_Episode_Override> GetTVDBCrossRefEpisode(int animeID);
 
         [Rest("TvDB/CrossRef/Episode/{aniDBEpisodeID}/{tvdbEpisodeID}", Verbs.Delete)]
         string RemoveLinkAniDBTvDBEpisode(int aniDBEpisodeID, int tvdbEpisodeID);
@@ -618,13 +616,13 @@ namespace Shoko.Models.Interfaces
         #region Trakt Provider
 
         [Rest("Trakt/CrossRef/{animeID}", Verbs.Get)]
-        List<CrossRef_AniDB_TraktV2> GetTraktCrossRefV2(int animeID);
+        List<CL_CrossRef_AniDB_Trakt> GetTraktCrossRefV2(int animeID);
 
         [Rest("Trakt/CrossRef", Verbs.Get)]
-        List<CrossRef_AniDB_TraktV2> GetAllTraktCrossRefs();
+        List<CL_CrossRef_AniDB_Trakt> GetAllTraktCrossRefs();
 
         [Rest("Trakt/CrossRef/Episode/{animeID}", Verbs.Get)]
-        List<CrossRef_AniDB_Trakt_Episode> GetTraktCrossRefEpisode(int animeID);
+        List<CL_CrossRef_AniDB_Trakt_Episode> GetTraktCrossRefEpisode(int animeID);
 
         [Rest("Trakt/CrossRef/{animeID}/{aniEpType}/{aniEpNumber}/{traktID}/{seasonNumber}/{traktEpNumber}/{crossRef_AniDB_TraktV2ID?}", Verbs.Post)]
         string LinkAniDBTrakt(int animeID, int aniEpType, int aniEpNumber, string traktID, int seasonNumber, int traktEpNumber, int? crossRef_AniDB_TraktV2ID);
@@ -642,10 +640,10 @@ namespace Shoko.Models.Interfaces
         CL_TraktDeviceCode GetTraktDeviceCode();
 
         [Rest("Trakt/Episode/{traktShowID?}", Verbs.Get)]
-        List<Trakt_Episode> GetAllTraktEpisodes(int? traktShowID);
+        List<CL_Trakt_Episode> GetAllTraktEpisodes(int? traktShowID);
 
         [Rest("Trakt/Episode/FromTraktId/{traktID}", Verbs.Get)]
-        List<Trakt_Episode> GetAllTraktEpisodesByTraktID(string traktID);
+        List<CL_Trakt_Episode> GetAllTraktEpisodesByTraktID(string traktID);
 
         [Rest("Trakt/Search/{criteria}", Verbs.Get)]
         List<CL_TraktTVShowResponse> SearchTrakt(string criteria);
@@ -682,10 +680,10 @@ namespace Shoko.Models.Interfaces
         List<CL_MovieDBMovieSearch_Response> SearchTheMovieDB(string criteria);
 
         [Rest("MovieDB/Poster/{movieID?}", Verbs.Get)]
-        List<MovieDB_Poster> GetAllMovieDBPosters(int? movieID);
+        List<CL_MovieDB_Poster> GetAllMovieDBPosters(int? movieID);
 
         [Rest("MovieDB/Fanart/{movieID?}", Verbs.Get)]
-        List<MovieDB_Fanart> GetAllMovieDBFanart(int? movieID);
+        List<CL_MovieDB_Fanart> GetAllMovieDBFanart(int? movieID);
 
         [Rest("MovieDB/Refresh/{movieID}", Verbs.Post)]
         string UpdateMovieDBData(int movieID);
@@ -695,7 +693,7 @@ namespace Shoko.Models.Interfaces
         #region Other Providers (MovieDB, MAL)
 
         [Rest("Other/CrossRef/{animeID}/{crossRefType}", Verbs.Get)]
-        CrossRef_AniDB_Other GetOtherAnimeCrossRef(int animeID, int crossRefType);
+        CL_CrossRef_AniDB_Other GetOtherAnimeCrossRef(int animeID, int crossRefType);
 
         [Rest("Other/CrossRef/{animeID}/{id}/{crossRefType}", Verbs.Post)]
         string LinkAniDBOther(int animeID, int id, int crossRefType);
@@ -784,13 +782,13 @@ namespace Shoko.Models.Interfaces
         #region Users
 
         [Rest("User",Verbs.Get)]
-        List<JMMUser> GetAllUsers();
+        List<CL_JMMUser> GetAllUsers();
 
         [Rest("User/{username}", Verbs.Post)]
-        JMMUser AuthenticateUser(string username, string password);
+        CL_JMMUser AuthenticateUser(string username, string password);
 
         [Rest("User", Verbs.Post)]
-        string SaveUser(JMMUser user);
+        string SaveUser(CL_JMMUser user);
 
         [Rest("User", Verbs.Delete)]
         string DeleteUser(int userID);
@@ -829,16 +827,16 @@ namespace Shoko.Models.Interfaces
         #region Playlists
 
         [Rest("Playlist",Verbs.Get)]
-        List<Playlist> GetAllPlaylists();
+        List<CL_Playlist> GetAllPlaylists();
 
         [Rest("Playlist", Verbs.Post)]
-        CL_Response<Playlist> SavePlaylist(Playlist contract);
+        CL_Response<CL_Playlist> SavePlaylist(CL_Playlist contract);
 
         [Rest("Playlist/{playlistID}", Verbs.Delete)]
         string DeletePlaylist(int playlistID);
 
         [Rest("Playlist/{playlistID}", Verbs.Get)]
-        Playlist GetPlaylist(int playlistID);
+        CL_Playlist GetPlaylist(int playlistID);
 
         #endregion
 
@@ -862,23 +860,23 @@ namespace Shoko.Models.Interfaces
         #region FFDShow Presets
 
         [Rest("FFDShowPreset/{videoLocalID}",Verbs.Get)]
-        FileFfdshowPreset GetFFDPreset(int videoLocalID);
+        CL_FileFfdshowPreset GetFFDPreset(int videoLocalID);
 
         [Rest("FFDShowPreset/{videoLocalID}", Verbs.Delete)]
         void DeleteFFDPreset(int videoLocalID);
 
         [Rest("FFDShowPreset", Verbs.Post)]
-        void SaveFFDPreset(FileFfdshowPreset preset);
+        void SaveFFDPreset(CL_FileFfdshowPreset preset);
 
         #endregion
 
         #region Rename Scripts
 
         [Rest("RenameScript",Verbs.Get)]
-        List<RenameScript> GetAllRenameScripts();
-        
+        List<CL_RenameScript> GetAllRenameScripts();
+
         [Rest("RenameScript", Verbs.Post)]
-        CL_Response<RenameScript> SaveRenameScript(RenameScript contract);
+        CL_Response<CL_RenameScript> SaveRenameScript(CL_RenameScript contract);
 
         [Rest("RenameScript/{renameScriptID}", Verbs.Delete)]
         string DeleteRenameScript(int renameScriptID);

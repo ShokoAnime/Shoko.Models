@@ -1,38 +1,43 @@
 ﻿using System;
-using Shoko.Models.Server;
 
-namespace Shoko.Models.Client
+namespace Shoko.Models.Client;
+
+public class CL_AniDB_Character : ICloneable
 {
-    public class CL_AniDB_Character : AniDB_Character, ICloneable
+    public int AniDB_CharacterID { get; set; }
+
+    public int CharID { get; set; }
+
+    public string PicName { get; set; }
+
+    public string CreatorListRaw { get; set; }
+
+    public string CharName { get; set; }
+
+    public string CharKanjiName { get; set; }
+
+    public string CharDescription { get; set; }
+
+    public string CharType { get; set; }
+
+    public CL_AniDB_Seiyuu Seiyuu { get; set; }
+
+    public CL_AniDB_Character() { }
+
+    public object Clone()
     {
-        // from AniDB_Anime_Character
-        public string CharType { get; set; }
-
-        public AniDB_Seiyuu Seiyuu { get; set; }
-
-        public CL_AniDB_Character()
+        var character = new CL_AniDB_Character()
         {
-        }
+            AniDB_CharacterID = AniDB_CharacterID,
+            CharID = CharID,
+            PicName = PicName,
+            CreatorListRaw = CreatorListRaw,
+            CharName = CharName,
+            CharKanjiName = CharKanjiName,
+            CharDescription = CharDescription,
+            Seiyuu = (CL_AniDB_Seiyuu) Seiyuu?.Clone(), CharType = CharType
+        };
 
-        public CL_AniDB_Character(AniDB_Character obj)
-        {
-            AniDB_CharacterID = obj.AniDB_CharacterID;
-            CharID = obj.CharID;
-            PicName = obj.PicName;
-            CreatorListRaw = obj.CreatorListRaw;
-            CharName = obj.CharName;
-            CharKanjiName = obj.CharKanjiName;
-            CharDescription = obj.CharDescription;
-        }
-
-        public new object Clone()
-        {
-            var character = new CL_AniDB_Character(this)
-            {
-                Seiyuu = (AniDB_Seiyuu) Seiyuu?.Clone(), CharType = CharType
-            };
-
-            return character;
-        }
+        return character;
     }
 }

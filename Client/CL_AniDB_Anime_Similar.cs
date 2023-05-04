@@ -1,10 +1,13 @@
-﻿using Shoko.Models.Server;
+﻿
+namespace Shoko.Models.Client;
 
-namespace Shoko.Models.Client
+public class CL_AniDB_Anime_Similar
 {
-    public class CL_AniDB_Anime_Similar : AniDB_Anime_Similar
-    {
-        public CL_AniDB_Anime AniDB_Anime { get; set; }
-        public CL_AnimeSeries_User AnimeSeries { get; set; }
-    }
+    public int AniDB_Anime_SimilarID { get; set; }
+    public int AnimeID { get; set; }
+    public int SimilarAnimeID { get; set; }
+    public int Approval { get; set; }
+    public int Total { get; set; }
+    public CL_AniDB_Anime AniDB_Anime { get; set; }
+    public CL_AnimeSeries_User AnimeSeries { get; set; }
 }

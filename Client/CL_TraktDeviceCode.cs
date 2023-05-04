@@ -1,8 +1,8 @@
-﻿namespace Shoko.Models.Client
+﻿namespace Shoko.Models.Client;
+
+public class CL_TraktDeviceCode
 {
-    public class CL_TraktDeviceCode
-    {
-        public string UserCode { get; set; }
-        public string VerificationUrl { get; set; }
-    }
+    public string UserCode { get; set; }
+
+    public string VerificationUrl { get; set; }
 }

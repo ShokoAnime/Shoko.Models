@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>Library</OutputType>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFrameworks>net6.0;netstandard2.0</TargetFrameworks>
     <RuntimeIdentifiers>win10-x64;win;linux-x64;linux-x86</RuntimeIdentifiers>
     <Platforms>x64;AnyCPU</Platforms>
     <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
@@ -12,9 +12,11 @@
     <Configurations>Debug;Release</Configurations>
   </PropertyGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Shoko.Plugin.Abstractions\Shoko.Plugin.Abstractions.csproj" />
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Include="MessagePack.Annotations" Version="2.4.35" />
     <PackageReference Include="Nancy.Rest.Annotations" Version="1.4.4" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-    <PackageReference Include="Shoko.Plugin.Abstractions" Version="2.2.0" />
   </ItemGroup>
 </Project>

@@ -1,18 +1,35 @@
-﻿using Shoko.Models.Server;
+﻿using System;
 
-namespace Shoko.Models.Client
+namespace Shoko.Models.Client;
+
+public class CL_DuplicateFile
 {
-    public class CL_DuplicateFile : DuplicateFile
-    {
 
-        // data from other entities
-        public int? AnimeID { get; set; }
-        public string AnimeName { get; set; }
-        public int? EpisodeType { get; set; }
-        public int? EpisodeNumber { get; set; }
-        public string EpisodeName { get; set; }
+    public int DuplicateFileID { get; set; }
 
-        public ImportFolder ImportFolder1 { get; set; }
-        public ImportFolder ImportFolder2 { get; set; }
-    }
+    public string FilePathFile1 { get; set; }
+
+    public string FilePathFile2 { get; set; }
+
+    public string Hash { get; set; }
+
+    public int ImportFolderIDFile1 { get; set; }
+
+    public int ImportFolderIDFile2 { get; set; }
+
+    public DateTime DateTimeUpdated { get; set; }
+
+    public int? AnimeID { get; set; }
+
+    public string AnimeName { get; set; }
+
+    public int? EpisodeType { get; set; }
+
+    public int? EpisodeNumber { get; set; }
+
+    public string EpisodeName { get; set; }
+
+    public CL_ImportFolder ImportFolder1 { get; set; }
+
+    public CL_ImportFolder ImportFolder2 { get; set; }
 }

@@ -1,9 +1,16 @@
-﻿using Shoko.Models.Server;
+﻿
+namespace Shoko.Models.Client;
 
-namespace Shoko.Models.Client
+public class CL_IgnoreAnime
 {
-    public class CL_IgnoreAnime : IgnoreAnime
-    {
-        public CL_AniDB_Anime Anime { get; set; }
-    }
+    public int IgnoreAnimeID { get; set; }
+
+    public int JMMUserID { get; set; }
+
+    public int AnimeID { get; set; }
+
+    public int IgnoreType { get; set; }
+
+    public CL_AniDB_Anime Anime { get; set; }
 }
+

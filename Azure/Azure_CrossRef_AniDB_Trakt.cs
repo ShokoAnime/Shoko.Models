@@ -1,8 +1,8 @@
 ﻿using Shoko.Models.Server;
 
-namespace Shoko.Models.Azure
+namespace Shoko.Models.Client
 {
-    public class Azure_CrossRef_AniDB_Trakt : CrossRef_AniDB_TraktV2
+    public class CL_Azure_CrossRef_AniDB_Trakt : CL_CrossRef_AniDB_Trakt
     {
         public string AnimeName { get; set; }
         public string Username { get; set; }
