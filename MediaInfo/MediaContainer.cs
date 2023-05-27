@@ -85,12 +85,8 @@ public class MediaContainer : IMediaInfo
     public List<MenuStream> MenuStreams =>
         _menus ?? (_menus = media?.track?.Where(a => a?.type == StreamType.Menu).Cast<MenuStream>().ToList() ?? new());
 
-    [JsonIgnore]
-    [IgnoreMember]
     string? IMediaInfo.Title => GeneralStream.Title;
 
-    [JsonIgnore]
-    [IgnoreMember]
     TimeSpan IMediaInfo.Duration
     {
         get
@@ -102,48 +98,33 @@ public class MediaContainer : IMediaInfo
         }
     }
 
-    [JsonIgnore]
-    [IgnoreMember]
     int IMediaInfo.BitRate => GeneralStream.OverallBitRate;
 
-    [JsonIgnore]
-    [IgnoreMember]
     decimal IMediaInfo.FrameRate => GeneralStream.FrameRate;
 
-    [JsonIgnore]
-    [IgnoreMember]
     DateTime? IMediaInfo.Encoded => GeneralStream.Encoded_Date;
 
-    [JsonIgnore]
-    [IgnoreMember]
     bool IMediaInfo.IsStreamable => GeneralStream.IsStreamable;
 
-    [JsonIgnore]
-    [IgnoreMember]
     string IMediaInfo.FileExtension => GeneralStream.FileExtension;
 
-    [JsonIgnore]
-    [IgnoreMember]
-    string IMediaInfo.MediaContainer => GeneralStream.Format;
+    string IMediaInfo.ContainerName => GeneralStream.Format;
 
-    [JsonIgnore]
-    [IgnoreMember]
-    int IMediaInfo.MediaContainerVersion => GeneralStream.Format_Version;
+    int IMediaInfo.ContainerVersion =>
+        GeneralStream.Format_Version;
 
-    [JsonIgnore]
-    [IgnoreMember]
-    IReadOnlyList<IVideoStream> IMediaInfo.Video => VideoStreams;
+    IReadOnlyList<IVideoStream> IMediaInfo.Video =>
+        VideoStreams;
 
-    [JsonIgnore]
-    [IgnoreMember]
-    IReadOnlyList<IAudioStream> IMediaInfo.Audio => AudioStreams;
+    IReadOnlyList<IAudioStream> IMediaInfo.Audio =>
+        AudioStreams;
 
-    [JsonIgnore]
-    [IgnoreMember]
-    IReadOnlyList<ITextStream> IMediaInfo.Subtitles => TextStreams;
+    IReadOnlyList<ITextStream> IMediaInfo.Subtitles =>
+        TextStreams;
 
-    [JsonIgnore]
-    [IgnoreMember]
+    IReadOnlyList<string> IMediaInfo.Attachments =>
+        GeneralStream.extra?.Attachments?.Split("/", StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries) ?? new string[] {};
+
     IReadOnlyList<IChapterInfo> IMediaInfo.Chapters
     {
         get
@@ -347,6 +328,8 @@ public class GeneralStream : Stream
 
     public DateTime? Encoded_Date { get; set; }
 
+    public GeneralExtra extra { get; }
+
     protected bool Equals(GeneralStream other) =>
         base.Equals(other) && Duration.Equals(other.Duration) && OverallBitRate == other.OverallBitRate && FileExtension == other.FileExtension && Format_Version == other.Format_Version
         && FrameRate == other.FrameRate && IsStreamable == other.IsStreamable && Nullable.Equals(Encoded_Date, other.Encoded_Date);
@@ -374,6 +357,13 @@ public class GeneralStream : Stream
             return hashCode;
         }
     }
+}
+
+
+[MessagePackObject(true)]
+public class GeneralExtra
+{
+    public string Attachments { get; set; }
 }
 
 [MessagePackObject(true)]
@@ -442,6 +432,7 @@ public class VideoStream : Stream, IVideoStream
     string IVideoStream.MatrixCoefficients => matrix_coefficients;
     string IVideoStream.FrameRateMode => FrameRate_Mode;
     string IVideoStream.Resolution => MediaInfoUtils.GetStandardResolution(Tuple.Create(Width, Height));
+    IStreamMuxingInfo IVideoStream.Muxing => new StreamMuxingInfoImpl(this);
 
     protected bool Equals(VideoStream other) =>
         base.Equals(other) && Format_Settings_CABAC == other.Format_Settings_CABAC && Format_Settings_BVOP == other.Format_Settings_BVOP && Format_Settings_QPel == other.Format_Settings_QPel
@@ -523,6 +514,7 @@ public class AudioStream : Stream, IAudioStream
     
     string IAudioStream.CompressionMode => Compression_Mode;
     string IAudioStream.BitRateMode => BitRate_Mode;
+    double? IAudioStream.DialogNorm => extra?.dialnorm;
 
     protected bool Equals(AudioStream other) =>
         base.Equals(other) && Channels == other.Channels && ChannelLayout == other.ChannelLayout && SamplesPerFrame == other.SamplesPerFrame && SamplingRate == other.SamplingRate
@@ -716,14 +708,10 @@ public class MenuStream : Stream
 #nullable enable
 public class ChapterInfo : IChapterInfo
 {
-    /// <summary>
-    /// Chapter title.
-    /// </summary>
+    /// <inheritdoc/>
     public string Title { get; }
 
-    /// <summary>
-    /// Chapter timestamp.
-    /// </summary>
+    /// <inheritdoc/>
     public TimeSpan Timestamp { get; }
 
     public ChapterInfo (string title, TimeSpan timestamp)
@@ -766,13 +754,13 @@ internal class StreamFormatInfoImpl : IStreamFormatInfo
     public string? HDRCompatibility { get; }
 
     /// <inheritdoc/>
-    public bool? CABAC { get; }
+    public bool CABAC { get; }
 
     /// <inheritdoc/>
-    public bool? BVOP { get; }
+    public bool BVOP { get; }
 
     /// <inheritdoc/>
-    public bool? QPel { get; }
+    public bool QPel { get; }
 
     /// <inheritdoc/>
     public string? GMC { get; }
@@ -805,27 +793,37 @@ internal class StreamFormatInfoImpl : IStreamFormatInfo
 
 internal class StreamCodecInfoImpl : IStreamCodecInfo
 {
-    /// <summary>
-    /// Codec name, if available.
-    /// </summary>
+    /// <inheritdoc/>
     [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
     public string? Name { get; }
 
-    /// <summary>
-    /// Simplified codec id.
-    /// </summary>
+    /// <inheritdoc/>
     public string Simplified { get; }
 
-    /// <summary>
-    /// Raw codec id.
-    /// </summary>
+    /// <inheritdoc/>
     public string? Raw { get; }
 
     public StreamCodecInfoImpl(Stream stream)
     {
         Name = stream.Codec;
-        Simplified = LegacyMediaUtils.TranslateCodec(stream)?.ToLowerInvariant() ?? "unknown";
+        Simplified = MediaInfoUtils.TranslateCodec(stream)?.ToLowerInvariant() ?? "unknown";
         Raw = stream.CodecID?.ToLowerInvariant();
+    }
+}
+
+internal class StreamMuxingInfoImpl : IStreamMuxingInfo
+{
+    /// <inheritdoc/>
+    public MuxingMode Mode { get; }
+
+    /// <inheritdoc/>
+    public string? Raw { get; }
+
+    public StreamMuxingInfoImpl(VideoStream stream)
+    {
+        var raw = stream.MuxingMode;
+        Mode = raw?.ToMuxingMode() ?? MuxingMode.Unknown;
+        Raw = raw;
     }
 }
 #nullable disable

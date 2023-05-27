@@ -88,28 +88,6 @@ namespace Shoko.Models.Enums
         Bangumi = 38, // Japanese site
         HiDive = 42, // Streaming service, series page.
     }
-
-    public enum AnimeType
-    {
-        None = -1, // Not on AniDB, but for ease of processing
-        Movie = 0,
-        OVA = 1,
-        TVSeries = 2,
-        TVSpecial = 3,
-        Web = 4,
-        Other = 5
-    }
-
-    public enum EpisodeType
-    {
-        Episode = 1,
-        Credits = 2,
-        Special = 3,
-        Trailer = 4,
-        Parody = 5,
-        Other = 6
-    }
-
     public enum EpisodeSourceType
     {
         File = 1,

@@ -1,5 +1,4 @@
-﻿using Shoko.Models.Server;
-
+﻿
 namespace Shoko.Models.Client
 {
     public class CL_Azure_CrossRef_AniDB_Trakt : CL_CrossRef_AniDB_Trakt
