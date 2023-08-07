@@ -50,7 +50,6 @@ public class CL_AniDB_Anime : ICloneable
 
     public int ReviewCount { get; set; }
 
-    [Obsolete("Deprecated in favor of AniDB_AnimeUpdate. This is for when an AniDB_Anime fails to save")]
     public DateTime DateTimeUpdated { get; set; }
 
     public DateTime DateTimeDescUpdated { get; set; }
